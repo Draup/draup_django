@@ -17,7 +17,7 @@
 ## State-full Delete/Update
   * Below are functions inorder to get the state-full delete/update 
   ### Get Affected Objects
-   * List out all objects which are affected because of object which is going to be deleted(Prompts).
+   * List out all objects which are affected because of object which is going to be deleted(Prompt,Messages).
   ### Delete Object
    * Delete object with all the dependent objects. 
    
