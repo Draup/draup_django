@@ -11,7 +11,7 @@
   * [State-full Delete/Update](#statefull)
      * [Get Affected Objects](#get-affected-objects)
      * [Delete Object](#delete-object)
-  * [Installation](#installtion)
+  * [Installation](#installation)
 
 
 ## State-full Delete/Update
