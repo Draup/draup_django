@@ -20,8 +20,14 @@
    * List out all objects which are affected because of object which is going to be deleted(Prompts).
   ### Delete Object
    * Delete object with all the dependent objects. 
+   
+## Installation
+  * Use Pip to install the module
+    ```
+    pip install module_name
+    ```
 ## Usage :
-  * `Sample model` : 
+  * Sample model : 
       
           class parent:
             name = models.CharField(max_length=100)
@@ -29,6 +35,16 @@
           class child:
             parent = models.ForeignKey(parent, on_delete=models.CASCADE) 
             name = models.CharField(max_length=100)
+  
+  * Code :
+         
+         from django_utils import handler
+         m = models.parent
+         // Get Prompt Message
+         error_list,prompt_message = handler.get_affected_objects({'id':1},m)
+         // For Deletion with all dependent objects
+         error_list = handler.delete_object({'id':1,'force_delete':True},m)
+         
           
     
     
