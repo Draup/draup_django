@@ -9,9 +9,9 @@
 ## Table of Content :
   
   * [State-full Delete/Update](#statefull)
-     * [Get Affected Objects](#get-objects)
+     * [Get Affected Objects](#get-affected-objects)
      * [Delete Object](#delete-object)
-  * [Installation](#install)
+  * [Installation](#installtion)
 
 
 ## State-full Delete/Update
