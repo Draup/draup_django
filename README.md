@@ -17,7 +17,7 @@
 ## State-full Delete/Update
   * Below are functions inorder to get the state-full delete/update 
   ### Get Affected Objects
-   * List out all objects which are affected because of object which is going to be deleted(Prompt,Messages).
+   * List out all objects which are affected because of object which is going to be deleted(Prompt-Messages).
   ### Delete Object
    * Delete object with all the dependent objects. 
    
@@ -44,6 +44,11 @@
          error_list,prompt_message = handler.get_affected_objects({'id':1},m)
          // For Deletion with all dependent objects
          error_list = handler.delete_object({'id':1,'force_delete':True},m)
+         
+  * Output :
+        
+        []
+      
          
           
     
