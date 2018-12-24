@@ -1,5 +1,5 @@
 # django_util
-Delete, Update functionality for normalised models
+### Delete, Update functionality for normalised models
 
 
 ## Use-Case : 
@@ -9,10 +9,17 @@ Delete, Update functionality for normalised models
 ## Table of Content :
   
   * [State-full Delete/Update](#statefull)
-     * [get_affected_objects](#get-objects)
-     * [delete_object](#delete-object)
+     * [Get Affected Objects](#get-objects)
+     * [Delete Object](#delete-object)
+  * [Installation](#install)
 
- 
+
+## State-full Delete/Update
+  * Below are functions inorder to get the state-full delete/update 
+  ### Get Affected Objects
+   * List out all objects which are affected because of object which is going to be deleted(Prompts).
+  ### Delete Object
+   * Delete object with all the dependent objects. 
 ## Usage :
   * `Sample model` : 
       
