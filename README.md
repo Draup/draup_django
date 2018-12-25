@@ -29,10 +29,10 @@
 ## Usage :
   * Sample model : 
       
-          class parent:
+          class parent(models.Model):
             name = models.CharField(max_length=100)
             
-          class child:
+          class child(models.Model):
             parent = models.ForeignKey(parent, on_delete=models.CASCADE) 
             name = models.CharField(max_length=100)
   
