@@ -11,6 +11,7 @@
   * [State-full Delete/Update](#statefull)
      * [Get Affected Objects](#get-affected-objects)
      * [Delete Object](#delete-object)
+     * [Update Object](#update-object)
   * [Installation](#installation)
 
 
@@ -20,6 +21,8 @@
    * List out all objects which are affected because of object which is going to be deleted(Prompt-Messages).
   ### Delete Object
    * Delete object with all the dependent objects. 
+  ### Update Object 
+   * Transferring Object dependencies from one object to another object.
    
 ## Installation
   * Use Pip to install the module
