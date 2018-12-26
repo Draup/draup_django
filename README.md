@@ -52,7 +52,7 @@
   * Use Pip to install the module
   
     ```
-    pip install module_name
+    pip install draup-django
     ```
     
 ## Usage :
@@ -82,13 +82,24 @@
   
   * Code :
          
-         from django_utils import handler
+         from draup_django import utility
          m = models.parent
-         // Get Prompt Message
-         error_list,prompt_message = handler.getAffectedObjects({'id':1},m)
-         // For Deletion with all dependent objects
-         error_list = handler.deleteObject({'id':1,'force_delete':True},m)
-         //Transferring Object dependencies
+
+         """
+         Get Prompt Message
+         """
+
+         error_list,prompt_message = utility.getAffectedObjects({'id':1},m)
+
+         """
+         Deletion with all dependent objects
+         """
+         error_list = utility.deleteObject({'id':1,'force_delete':True},m)
+
+         """
+         Transferring Object dependencies
+         """
+
          source = m.objects.filter(id=1).first()
          destination = m.objects.filter(id=2).first()
          error_list = utility.updateObjectDependencies(source,destination)
