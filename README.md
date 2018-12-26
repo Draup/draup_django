@@ -109,5 +109,7 @@
   * **Note** : 
        -  Every function returns error_list so if its empty than only operation is successfull. 
        -  According to above Child/Parent Table `updateObjectDependencies` function will transafer object dependency from `id:1` to `id:2` so parent_id of `Bob` will become `2`. 
-    
-    
+   
+## Limitation :
+   * `updateObjectDependencies` will not work in case of unique constraint,one to one field in model
+   
