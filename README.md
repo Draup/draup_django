@@ -26,7 +26,7 @@
    ```
   ### Delete Object
    * Delete object with all the dependent objects. 
-   * `deleteObject` takes input dict with id as key and reference of model.
+   * `deleteObject` takes input dict with id and force_delete as key and reference of model.
    ```
    Sample Input : ({'id':1,'force_delete':True},model_reference)
    Output : Error_list(list)
