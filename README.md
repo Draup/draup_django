@@ -39,14 +39,11 @@
   ### Update Object 
    * Transferring Object dependencies from one object to another object.
    * `updateObjectDependencies` takes input source,destination objects.
-   * According to above sample table 
    
    ```
    Sample Input : (source,destination)
    Output : Error_list(list)
    ```
-   
-* **Note** : Every function returns error_list so if its empty than only operation is successfull. 
 
 ## Installation
   * Use Pip to install the module
@@ -109,6 +106,8 @@
         
         [{'message': 'This object has been used in child 1 times.', 'model_name': 'child', 'Parent models': '', 'count': 1}] 
          
-          
+  * **Note** : 
+       -  Every function returns error_list so if its empty than only operation is successfull. 
+       -  According to above Child/Parent Table `updateObjectDependencies` function will transafer object dependency from `id:1` to `id:2` so parent_id of `Bob` will become `2`. 
     
     
