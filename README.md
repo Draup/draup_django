@@ -4,47 +4,57 @@
 
 ## Use-Case : 
 
-  * `Django util` provide state-full delete, update functionality for ORM(object relational mapping)level.
+  * `Django util` provide statefull delete, update functionality for ORM(object relational mapping)level.
   
 ## Table of Content :
   
-  * [State-full Delete/Update](#statefull)
+  * [Statefull Delete/Update](#statefull)
      * [Get Affected Objects](#get-affected-objects)
      * [Delete Object](#delete-object)
      * [Update Object](#update-object)
   * [Installation](#installation)
 
 
-## State-full Delete/Update
-  * Below are functions inorder to get the state-full delete/update 
+## Statefull Delete/Update
+  * Below are functions inorder to get the statefull delete/update
+ 
   ### Get Affected Objects
-   * List out all objects which are affected because of object which is going to be deleted(Prompt-Messages).
+   * List out all dependent objects(Prompt-Messages).
    * `getAffectedObjects` takes input dict with id as key and reference of model.
+   
    ```
    Sample Input : ({'id':1},model_reference)
    Output : Error_list(list),prompt messages(list)
    ```
+   
   ### Delete Object
    * Delete object with all the dependent objects. 
    * `deleteObject` takes input dict with id and force_delete as key and reference of model.
+   
    ```
    Sample Input : ({'id':1,'force_delete':True},model_reference)
    Output : Error_list(list)
    ```
+   
   ### Update Object 
    * Transferring Object dependencies from one object to another object.
    * `updateObjectDependencies` takes input source,destination objects.
+   * According to above sample table 
+   
    ```
    Sample Input : (source,destination)
    Output : Error_list(list)
    ```
+   
 * **Note** : Every function returns error_list so if its empty than only operation is successfull. 
 
 ## Installation
   * Use Pip to install the module
+  
     ```
     pip install module_name
     ```
+    
 ## Usage :
   * Sample model : 
       
@@ -54,6 +64,21 @@
           class child(models.Model):
             parent = models.ForeignKey(parent, on_delete=models.CASCADE) 
             name = models.CharField(max_length=100)
+      
+  *  Parent Table :
+  
+     | id     | Name      |
+     | ------ | --------- |
+     |  1     |  Alice    |
+     |  2     |  Tom      |
+  
+ * Child Table :
+  
+     | id          | Name       |  parent_id    |
+     | ----------- |  --------- |-------------- |
+     |  1          |  Bob       |     1         |
+     |  2          |  Jack      |     2         | 
+
   
   * Code :
          
@@ -71,8 +96,7 @@
   * Output :
         Prompt Message of `getAffectedObjects` function
         
-        [{'message': 'This object has been used in child 2 times.', 'model_name': 'child', 'Parent models': '', 'count': 2}]
-      
+        [{'message': 'This object has been used in child 1 times.', 'model_name': 'child', 'Parent models': '', 'count': 1}] 
          
           
     
