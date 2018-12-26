@@ -4,19 +4,20 @@
 
 ## Use-Case : 
 
-  * `Django util` provide statefull delete, update functionality for ORM(object relational mapping)level.
+  * `Django util` provide 
+  delete, update functionality for ORM(object relational mapping)level.
   
 ## Table of Content :
   
-  * [Statefull Delete/Update](#statefull)
+  * [Stateful Delete/Update](#stateful)
      * [Get Affected Objects](#get-affected-objects)
      * [Delete Object](#delete-object)
      * [Update Object](#update-object)
   * [Installation](#installation)
 
 
-## Statefull Delete/Update
-  * Below are functions inorder to get the statefull delete/update
+## Stateful Delete/Update
+  * Below are functions inorder to get the stateful delete/update
  
   ### Get Affected Objects
    * List out all dependent objects(Prompt-Messages).
@@ -111,5 +112,5 @@
        -  According to above Child/Parent Table `updateObjectDependencies` function will transafer object dependency from `id:1` to `id:2` so parent_id of `Bob` will become `2`. 
    
 ## Limitation :
-   * `updateObjectDependencies` will not work in case of unique constraint,one to one field in model
+   * `updateObjectDependencies` will not work in case of unique constraint,one to one field in model.
    
