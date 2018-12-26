@@ -41,9 +41,11 @@
          from django_utils import handler
          m = models.parent
          // Get Prompt Message
-         error_list,prompt_message = handler.get_affected_objects({'id':1},m)
+         error_list,prompt_message = handler.getAffectedObjects({'id':1},m)
          // For Deletion with all dependent objects
-         error_list = handler.delete_object({'id':1,'force_delete':True},m)
+         error_list = handler.deleteObject({'id':1,'force_delete':True},m)
+         //Transferring Object dependencies
+         error_list = utility.updateObjectDependencies(source,destination)
          
   * Output :
         
