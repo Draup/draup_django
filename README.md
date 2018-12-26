@@ -19,11 +19,27 @@
   * Below are functions inorder to get the state-full delete/update 
   ### Get Affected Objects
    * List out all objects which are affected because of object which is going to be deleted(Prompt-Messages).
+   * `getAffectedObjects` takes input dict with id as key and reference of model.
+   ```
+   Sample Input : ({'id':1},model_reference)
+   Output : Error_list(list),prompt messages(list)
+   ```
   ### Delete Object
    * Delete object with all the dependent objects. 
+   * `deleteObject` takes input dict with id as key and reference of model.
+   ```
+   Sample Input : ({'id':1,'force_delete':True},model_reference)
+   Output : Error_list(list)
+   ```
   ### Update Object 
    * Transferring Object dependencies from one object to another object.
-   
+   * `updateObjectDependencies` takes input source,destination objects.
+   ```
+   Sample Input : (source,destination)
+   Output : Error_list(list)
+   ```
+* **Note** : Every function returns error_list so if its empty than only operation is successfull. 
+
 ## Installation
   * Use Pip to install the module
     ```
@@ -51,8 +67,9 @@
          error_list = utility.updateObjectDependencies(source,destination)
          
   * Output :
+        Prompt Message of `getAffectedObjects` function
         
-        []
+        [{'message': 'This object has been used in child 2 times.', 'model_name': 'child', 'Parent models': '', 'count': 2}]
       
          
           
