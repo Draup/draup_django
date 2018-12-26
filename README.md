@@ -64,6 +64,8 @@
          // For Deletion with all dependent objects
          error_list = handler.deleteObject({'id':1,'force_delete':True},m)
          //Transferring Object dependencies
+         source = m.objects.filter(id=1).first()
+         destination = m.objects.filter(id=2).first()
          error_list = utility.updateObjectDependencies(source,destination)
          
   * Output :
