@@ -108,7 +108,7 @@
         [{'message': 'This object has been used in child 1 times.', 'model_name': 'child', 'Parent models': '', 'count': 1}] 
          
   * **Note** : 
-       -  Every function returns error_list so if its empty than only operation is successfull. 
+       -  Every function returns the error_list, and hence only the operation is successful only if it is empty. 
        -  According to above Child/Parent Table `updateObjectDependencies` function will transafer object dependency from `id:1` to `id:2` so parent_id of `Bob` will become `2`. 
    
 ## Limitation :
