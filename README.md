@@ -121,4 +121,9 @@
 ## Limitation :
    * `updateObjectDependencies` will not work in case of unique constraint,one to one field in model.
    * Please feel free to share your thoughts and feedback at info@draup.com .
+  
+
+## About Draup :
+   
+  [Draup](https://draup.com) is an enterprise decision-making platform for global CXO leaders in sales and talent domains. Draup combines machine     learning with human curation to help organizations make data-driven strategic decisions. The platform is powered by machine-   generated models, which are augmented by a team of analysts adding their learning-based insights to provide a 360-degree       transactable view of their sales and talent ecosystem.
    
