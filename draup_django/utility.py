@@ -1,0 +1,12 @@
+from .handler import OrmHandler
+
+def getAffectedObjects(data, handler):
+    return OrmHandler().delete_service(data, handler, exception_list=[])
+
+def deleteObject(data,handler):
+    error_list, affected_objects = OrmHandler().delete_service(data, handler, exception_list=[])
+    return errror_list
+
+def updateObjectDependencies(source,destination):
+    error_list  = OrmHandler().update_dependencies(source,destination)
+    return errror_list
