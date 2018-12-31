@@ -1,10 +1,10 @@
-# django_util
+# draup_django
 ### Delete, Update functionality for normalised models
 
 
 ## Use-Case : 
 
-  * `Django util` provide 
+  * `Draup Django` provide 
   delete, update functionality for ORM(object relational mapping)level.
   
 ## Table of Content :
