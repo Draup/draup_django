@@ -1,4 +1,7 @@
 # draup_django
+
+[![Downloads](https://pepy.tech/badge/draup-django)](https://pepy.tech/project/draup-django)
+
 ### Delete, Update functionality for normalised models
 
 
