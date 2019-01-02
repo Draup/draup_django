@@ -128,5 +128,5 @@
 
 ## About Draup :
    
-  [Draup](https://draup.com) is an enterprise decision-making platform for global CXO leaders in sales and talent domains. Draup combines Artificial Intelligence with human curation to help organizations make data-driven strategic decisions. The platform is powered by machine- generated models, which are augmented by a team of analysts adding their learning-based insights to provide a 360-degree transactable view of their sales and talent ecosystem. We work on cutting edge technolgies and run highly complex algorithms on huge volumes of data. We are open sourcing certain internal tools which are not part of our core propietary business algorithms.
+  [Draup](https://draup.com) is an enterprise decision-making platform for global CXO leaders in sales and talent domains. Draup combines Artificial Intelligence with human curation to help organizations make data-driven strategic decisions. The platform is powered by machine- generated models, which are augmented by a team of analysts adding their learning-based insights to provide a 360-degree transactable view of their sales and talent ecosystem. We work on cutting edge technolgies and run highly complex algorithms on huge volumes of data. We are open sourcing certain internal tools which are not part of our core business.
    
