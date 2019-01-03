@@ -8,7 +8,7 @@
 ## Use-Case : 
 
   * `Draup Django` provide 
-  delete, update functionality for ORM(object relational mapping)level.
+   stateful delete, update functionality for ORM(object relational mapping)level.
   
 ## Table of Content :
   
