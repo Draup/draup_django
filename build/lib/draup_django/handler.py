@@ -159,8 +159,7 @@ class OrmHandler:
     Deletion of one to one objects
     """
 
-    def delete_one_to_one(self, handler, id):
-        delete_element = handler.objects.filter(id=id).first()
+    def delete_one_to_one(self, delete_element, id):
         element_fields = delete_element._meta.__dict__['fields']
         for field in element_fields:
             if field.one_to_one:
@@ -179,7 +178,8 @@ class OrmHandler:
             parent_set_dict = {}
             id = data['id'] if 'id' in data else None
             force_delete = data['force_delete'] if 'force_delete' in data else False
-            delete_element = handler.objects.filter(id=id).first()
+            object_to_delete =handler.objects.filter(id=id)
+            delete_element = object_to_delete.first()
             if not delete_element:
                 raise Exception(str(delete_element) + ' element not found with id %s' % (id))
             element_fields = delete_element._meta.__dict__['fields']
@@ -189,14 +189,16 @@ class OrmHandler:
                     flag = 1
             if force_delete:
                 if flag == 1:
-                    self.delete_one_to_one(handler, id)
+                    self.delete_one_to_one(delete_element, id)
                 else:
-                    handler.delete(id=id)
+                    object_to_delete.delete()
             else:
                 deletion_set, parent_set_dict = self.delete_functionality(delete_element, deletion_set, parent_set_dict,
                                                                           exception_list)
                 self.affected_object = self.get_exception_list(deletion_set, parent_set_dict, exception_list)
         except Exception as e:
+            import traceback
+            print(traceback.print_exc())
             self.error_list.append({'Error message': str(e)})
         return self.error_list, self.affected_object
 
