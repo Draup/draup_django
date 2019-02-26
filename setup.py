@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="draup_django",
-    version="1.1.0",
+    version="1.1.1",
     author="Arpit | Teja | Kashish",
     author_email="arpit@zinnov.com",
     description=" Django Utility - Draup Labs",

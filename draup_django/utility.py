@@ -7,6 +7,6 @@ def deleteObject(data,handler):
     error_list, affected_objects = OrmHandler().delete_service(data, handler, exception_list=[])
     return error_list
 
-def updateObjectDependencies(source,destina sddsddsdtion):
+def updateObjectDependencies(source,destination):
     error_list  = OrmHandler().update_dependencies(source,destination)
     return error_list
