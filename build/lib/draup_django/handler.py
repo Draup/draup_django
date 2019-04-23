@@ -1,5 +1,5 @@
 from .parser import OrmParser
-
+import traceback
 class OrmHandler:
 
     def __init__(self):
@@ -47,8 +47,7 @@ class OrmHandler:
                         else:
                             if (to_be_called_name == ''):
                                 continue
-                            exception_list.append({
-                                                      "Error message": "Data from " + to_be_called_name + " with dependencies on this will be deleted"})
+                            exception_list.append({"Error message": "Data from " + to_be_called_name + " with dependencies on this will be deleted"})
                             continue
                 if (to_be_called_name.lower() == object_to_delete._meta.model.__name__.lower()):
                     continue
@@ -95,7 +94,7 @@ class OrmHandler:
                                                                           parent_set_dict,
                                                                           exception_list)
         except Exception as e:
-            self.error_list.append({'Error message': str(e)})
+            self.error_list.append({'Error message': str(traceback.format_exc())})
         return deletion_set, parent_set_dict
 
     """
@@ -197,8 +196,6 @@ class OrmHandler:
                                                                           exception_list)
                 self.affected_object = self.get_exception_list(deletion_set, parent_set_dict, exception_list)
         except Exception as e:
-            import traceback
-            print(traceback.print_exc())
             self.error_list.append({'Error message': str(e)})
         return self.error_list, self.affected_object
 
@@ -229,8 +226,13 @@ class OrmHandler:
                         if hasattr(source, field_list[iter].__dict__['related_name']):
                             reference_objs = getattr(source, field_list[iter].__dict__['related_name'])
                             ids = reference_objs.values_list('id')
-                            for iter_in in reference_objs.model._meta._get_fields:
-                                if hasattr(iter_in,'related_model') and iter_in.related_model.__class__ == source.__class__:
+                            for iter_in in reference_objs.model._meta._get_fields():
+                                if hasattr(iter_in,'related_model') and (
+                                        (hasattr(iter_in.related_model,'model') and
+                                         iter_in.related_model.model == source.__class__) or
+                                        (hasattr(iter_in.related_model,'_meta') and
+                                         hasattr(iter_in.related_model._meta,'model')
+                                         and iter_in.related_model._meta.model == source.__class__)):
                                     field_name = iter_in.column
                             for iter_in in ids:
                                 reference_objs.model.objects.filter(id=iter_in[0]).update(**{field_name: destination.id})
@@ -244,7 +246,7 @@ class OrmHandler:
                     if hasattr(source, to_be_called_name):
                         reference_objs = getattr(source, to_be_called_name)
                         field_name = source._meta.model_name + '_id'
-                        ids = reference_objs.through.objects.filter(**{customized_name:source.id}).values_list('id')
+                        ids = reference_objs.through.objects.filter(**{field_name:source.id}).values_list('id')
                         for iter_in in ids:
                             reference_objs.through.objects.filter(id=iter_in[0]).update(**{field_name:destination.id})
         except Exception as e:
