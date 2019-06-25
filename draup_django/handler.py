@@ -82,7 +82,7 @@ class OrmHandler:
                 if i.one_to_one:
                     if hasattr(i, 'rel') and i.rel.on_delete.__name__ != 'DO_NOTHING':
                         one_to_one_list.append(i)
-                    elif hasattr(i, 'remote_field') and i.rel.on_delete.__name__ != 'DO_NOTHING':
+                    elif hasattr(i, 'remote_field') and i.remote_field.on_delete.__name__ != 'DO_NOTHING':
                         one_to_one_list.append(i)
 
             for i in one_to_one_list:
@@ -187,8 +187,11 @@ class OrmHandler:
             element_fields = delete_element._meta.__dict__['fields']
             flag = 0
             for field in element_fields:
-                if field.one_to_one and field.rel.on_delete.__name__ != 'DO_NOTHING':
-                    flag = 1
+                if field.one_to_one:
+                    if hasattr(i, 'rel') and i.rel.on_delete.__name__ != 'DO_NOTHING':
+                        flag=1
+                    elif hasattr(i, 'remote_field') and i.remote_field.on_delete.__name__ != 'DO_NOTHING':
+                        flag=1
             if force_delete:
                 if flag == 1:
                     self.delete_one_to_one(delete_element, id)
