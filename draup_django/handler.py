@@ -79,8 +79,11 @@ class OrmHandler:
             iter_all_fields = object_to_delete._meta.fields
             one_to_one_list = []
             for i in iter_all_fields:
-                if i.one_to_one and i.rel.on_delete.__name__ != 'DO_NOTHING':
-                    one_to_one_list.append(i)
+                if i.one_to_one:
+                    if hasattr(i, 'rel') and i.rel.on_delete.__name__ != 'DO_NOTHING':
+                        one_to_one_list.append(i)
+                    elif hasattr(i, 'remote_field') and i.rel.on_delete.__name__ != 'DO_NOTHING':
+                        one_to_one_list.append(i)
 
             for i in one_to_one_list:
                 primary_id = getattr(object_to_delete, i.__dict__['column'])
