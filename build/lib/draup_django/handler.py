@@ -47,6 +47,7 @@ class OrmHandler:
                                                                                                 parent_set_dict)
                             else:
                                 print("to-be called count check %s" % to_be_called)
+                                continue
                         else:
                             if (to_be_called_name == ''):
                                 continue
