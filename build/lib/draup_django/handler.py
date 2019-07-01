@@ -38,12 +38,15 @@ class OrmHandler:
                         to_be_called_name_passed = ''.join(e for e in to_be_called_name if e.isalnum()).lower()
                         if hasattr(object_to_delete, field_list[i].__dict__['related_name']):
                             to_be_called = getattr(object_to_delete, field_list[i].__dict__['related_name'])
-                            data = to_be_called.count()
-                            if data > 0:
-                                deletion_set, parent_set_dict = self.parser._process_operation(data,object_to_delete,
-                                                                                               to_be_called_name_passed,
-                                                                                               deletion_set,
-                                                                                               parent_set_dict)
+                            if hasattr(to_be_called, 'count'):
+                                data = to_be_called.count()
+                                if data > 0:
+                                    deletion_set, parent_set_dict = self.parser._process_operation(data,object_to_delete,
+                                                                                                to_be_called_name_passed,
+                                                                                                deletion_set,
+                                                                                                parent_set_dict)
+                            else:
+                                print("to-be called count check %s" % to_be_called)
                         else:
                             if (to_be_called_name == ''):
                                 continue
