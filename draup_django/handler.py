@@ -250,6 +250,8 @@ class OrmHandler:
                         continue
                 if (to_be_called_name.lower() == source._meta.model.__name__.lower()):
                     continue
+
+                to_be_iterated = reference_objs.model.objects.filter(**reference_objs.core_filters)
                 manytomany = source._meta.__dict__['local_many_to_many']
                 for iter in manytomany:
                     to_be_called_name = iter.__dict__['name']
@@ -259,6 +261,9 @@ class OrmHandler:
                         ids = reference_objs.through.objects.filter(**{field_name:source.id}).values_list('id')
                         for iter_in in ids:
                             reference_objs.through.objects.filter(id=iter_in[0]).update(**{field_name:destination.id})
+
+                for item_obj in to_be_iterated:
+                    self.update_dependencies(item_obj, destination)
         except Exception as e:
             self.error_list.append({'Error message': str(e)})
         return self.error_list
