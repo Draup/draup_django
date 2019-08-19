@@ -5,7 +5,7 @@ Summary:  Django Utility - Draup Labs
 Home-page: https://github.com/Draup-Zinnov/draup_django
 Author: Arpit | Teja | Kashish
 Author-email: arpit@zinnov.com
-License: UNKNOWN
+License: MIT
 Description: # draup_django
         
         [![Downloads](https://pepy.tech/badge/draup-django)](https://pepy.tech/project/draup-django)
@@ -139,10 +139,13 @@ Description: # draup_django
           [Draup](https://draup.com) is an enterprise decision-making platform for global CXO leaders in sales and talent domains. Draup combines Artificial Intelligence with human curation to help organizations make data-driven strategic decisions. The platform is powered by machine- generated models, which are augmented by a team of analysts adding their learning-based insights to provide a 360-degree transactable view of their sales and talent ecosystem. We work on cutting edge technolgies and run highly complex algorithms on huge volumes of data. We also rely on open-sourcing which equips us with the right tools which allows us to find truly unique and innovate solutions to several problems.
            
         
+Keywords: django normalisation
 Platform: UNKNOWN
 Classifier: Framework :: Django
 Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
+Requires-Python: >=3.0.*
 Description-Content-Type: text/markdown
