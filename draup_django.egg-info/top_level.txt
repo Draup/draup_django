@@ -1,2 +1,0 @@
-draup_django
-test

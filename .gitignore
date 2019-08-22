@@ -1,0 +1,6 @@
+venv/
+dist/
+build/
+draup_django.egg-info
+*.pyc
+.DS_Store
