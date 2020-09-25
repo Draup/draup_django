@@ -1,5 +1,7 @@
 from .parser import OrmParser
 import traceback
+
+
 class OrmHandler:
 
     def __init__(self):
@@ -7,15 +9,11 @@ class OrmHandler:
         self.affected_object = []
         self.parser = OrmParser()
 
-    """
-    Filtering all type of fields(one to one, one to many,many to one)
-    """
+    # Filtering all type of fields(one to one, one to many,many to one)
 
     def delete_functionality(self, object_to_delete, deletion_set, parent_set_dict, exception_list):
         try:
-            """
-            Filtering one to many fields
-            """
+            # Filtering one to many fields
             all_related_fields = self.parser._get_all_object_field(object_to_delete)
             field_list = self.parser._get_one_to_many_field(all_related_fields)
 
@@ -29,7 +27,7 @@ class OrmHandler:
                     to_be_called = getattr(object_to_delete, field_to_test)
                     data = to_be_called.count()
                     if data > 0:
-                        deletion_set, parent_set_dict = self.parser._process_operation(data,object_to_delete,
+                        deletion_set, parent_set_dict = self.parser._process_operation(data, object_to_delete,
                                                                                        to_be_called_name_passed,
                                                                                        deletion_set, parent_set_dict)
                 else:
@@ -41,25 +39,25 @@ class OrmHandler:
                             if hasattr(to_be_called, 'count'):
                                 data = to_be_called.count()
                                 if data > 0:
-                                    deletion_set, parent_set_dict = self.parser._process_operation(data,object_to_delete,
-                                                                                                to_be_called_name_passed,
-                                                                                                deletion_set,
-                                                                                                parent_set_dict)
+                                    deletion_set, parent_set_dict = self.parser._process_operation(data,
+                                                                                                   object_to_delete,
+                                                                                                   to_be_called_name_passed,
+                                                                                                   deletion_set,
+                                                                                                   parent_set_dict)
                             else:
                                 print("to-be called count check %s" % to_be_called)
                                 continue
                         else:
                             if (to_be_called_name == ''):
                                 continue
-                            exception_list.append({"Error message": "Data from " + to_be_called_name + " with dependencies on this will be deleted"})
+                            exception_list.append({
+                                                      "Error message": "Data from " + to_be_called_name + " with dependencies on this will be deleted"})
                             continue
                 if (to_be_called_name.lower() == object_to_delete._meta.model.__name__.lower()):
                     continue
                 to_be_iterated = to_be_called.model.objects.filter(**to_be_called.core_filters)
 
-                """
-                Filtering many to many fields
-                """
+                # Filtering many to many fields
                 manytomanylist = object_to_delete._meta.__dict__['local_many_to_many']
                 for i in manytomanylist:
                     to_be_called_name_passed = i.model.__name__ + '_' + i.__dict__['name']
@@ -77,9 +75,7 @@ class OrmHandler:
                     deletion_set, parent_set_dict = self.delete_functionality(item_obj, deletion_set, parent_set_dict,
                                                                               exception_list)
 
-            """
-            Filtering one to one fields
-            """
+            # Filtering one to one fields
             iter_all_fields = object_to_delete._meta.fields
             one_to_one_list = []
             for i in iter_all_fields:
@@ -104,9 +100,7 @@ class OrmHandler:
             self.error_list.append({'Error message': str(traceback.format_exc())})
         return deletion_set, parent_set_dict
 
-    """
-    Building exception list of effected objects
-    """
+    # Building exception list of effected objects
 
     def get_exception_list(self, deletion_set, parent_set_dict, exception_list):
 
@@ -161,9 +155,7 @@ class OrmHandler:
 
         return exception_list
 
-    """
-    Deletion of one to one objects
-    """
+    # Deletion of one to one objects
 
     def delete_one_to_one(self, delete_element, id):
         element_fields = delete_element._meta.__dict__['fields']
@@ -174,9 +166,7 @@ class OrmHandler:
                 parent_element = parent_model.objects.filter(id=parent_id).first()
                 parent_element.delete()
 
-    """
-    Processing deletion based on parameters passed
-    """
+    # Processing deletion based on parameters passed
 
     def delete_service(self, data, handler, exception_list):
         try:
@@ -184,7 +174,7 @@ class OrmHandler:
             parent_set_dict = {}
             id = data['id'] if 'id' in data else None
             force_delete = data['force_delete'] if 'force_delete' in data else False
-            object_to_delete =handler.objects.filter(id=id)
+            object_to_delete = handler.objects.filter(id=id)
             delete_element = object_to_delete.first()
             if not delete_element:
                 raise Exception(str(delete_element) + ' element not found with id %s' % (id))
@@ -193,9 +183,9 @@ class OrmHandler:
             for field in element_fields:
                 if field.one_to_one:
                     if hasattr(i, 'rel') and i.rel.on_delete.__name__ != 'DO_NOTHING':
-                        flag=1
+                        flag = 1
                     elif hasattr(i, 'remote_field') and i.remote_field.on_delete.__name__ != 'DO_NOTHING':
-                        flag=1
+                        flag = 1
             if force_delete:
                 if flag == 1:
                     self.delete_one_to_one(delete_element, id)
@@ -209,10 +199,8 @@ class OrmHandler:
             self.error_list.append({'Error message': str(e)})
         return self.error_list, self.affected_object
 
-    
-    """
-    Updating foreign/Many-to-Many field dependencies from one to another object
-    """
+    # Updating foreign/Many-to-Many field dependencies from one to another object
+
     def update_dependencies(self, source, destination):
         try:
             all_related_fields = self.parser._get_all_object_field(source)
@@ -237,15 +225,16 @@ class OrmHandler:
                             reference_objs = getattr(source, field_list[iter].__dict__['related_name'])
                             ids = reference_objs.values_list('id')
                             for iter_in in reference_objs.model._meta._get_fields():
-                                if hasattr(iter_in,'related_model') and (
-                                        (hasattr(iter_in.related_model,'model') and
+                                if hasattr(iter_in, 'related_model') and (
+                                        (hasattr(iter_in.related_model, 'model') and
                                          iter_in.related_model.model == source.__class__) or
-                                        (hasattr(iter_in.related_model,'_meta') and
-                                         hasattr(iter_in.related_model._meta,'model')
+                                        (hasattr(iter_in.related_model, '_meta') and
+                                         hasattr(iter_in.related_model._meta, 'model')
                                          and iter_in.related_model._meta.model == source.__class__)):
                                     field_name = iter_in.column
                             for iter_in in ids:
-                                reference_objs.model.objects.filter(id=iter_in[0]).update(**{field_name: destination.id})
+                                reference_objs.model.objects.filter(id=iter_in[0]).update(
+                                    **{field_name: destination.id})
                     else:
                         continue
                 if (to_be_called_name.lower() == source._meta.model.__name__.lower()):
@@ -258,9 +247,9 @@ class OrmHandler:
                     if hasattr(source, to_be_called_name):
                         reference_objs = getattr(source, to_be_called_name)
                         field_name = source._meta.model_name + '_id'
-                        ids = reference_objs.through.objects.filter(**{field_name:source.id}).values_list('id')
+                        ids = reference_objs.through.objects.filter(**{field_name: source.id}).values_list('id')
                         for iter_in in ids:
-                            reference_objs.through.objects.filter(id=iter_in[0]).update(**{field_name:destination.id})
+                            reference_objs.through.objects.filter(id=iter_in[0]).update(**{field_name: destination.id})
 
                 for item_obj in to_be_iterated:
                     self.update_dependencies(item_obj, destination)
