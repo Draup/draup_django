@@ -10,8 +10,8 @@ with open('requirements.txt') as f:
 setuptools.setup(
     name="draup_django",
     version="1.4.0",
-    author="Arpit | Teja | Kashish",
-    author_email="arpit@zinnov.com",
+    author="Draup Team",
+    author_email="info@draup.com",
     description=" Django Utility - Draup Labs",
     long_description=long_description,
     long_description_content_type="text/markdown",
